@@ -1,0 +1,60 @@
+0 info it worked if it ends with ok
+1 verbose cli [ 'node',
+1 verbose cli   '/home/taras/local/bin/npm',
+1 verbose cli   'install',
+1 verbose cli   'connector-manager' ]
+2 info using npm@1.1.71
+3 info using node@v0.8.20
+4 verbose read json /home/taras/Practicas_SWCM/Tema3/blog_2012/package.json
+5 verbose read json /home/taras/Practicas_SWCM/Tema3/blog_2012/node_modules/sequelize/package.json
+6 verbose read json /home/taras/Practicas_SWCM/Tema3/blog_2012/node_modules/nodejs-yapaginate/package.json
+7 verbose read json /home/taras/Practicas_SWCM/Tema3/blog_2012/node_modules/express-partials/package.json
+8 verbose read json /home/taras/Practicas_SWCM/Tema3/blog_2012/node_modules/express/package.json
+9 verbose read json /home/taras/Practicas_SWCM/Tema3/blog_2012/node_modules/connect-flash/package.json
+10 verbose read json /home/taras/Practicas_SWCM/Tema3/blog_2012/node_modules/ejs/package.json
+11 verbose read json /home/taras/Practicas_SWCM/Tema3/blog_2012/node_modules/pg/package.json
+12 verbose read json /home/taras/Practicas_SWCM/Tema3/blog_2012/node_modules/cloudinary/package.json
+13 verbose read json /home/taras/Practicas_SWCM/Tema3/blog_2012/node_modules/xmlbuilder/package.json
+14 verbose read json /home/taras/Practicas_SWCM/Tema3/blog_2012/node_modules/zombie/package.json
+15 verbose read json /home/taras/Practicas_SWCM/Tema3/blog_2012/node_modules/mocha/package.json
+16 verbose read json /home/taras/Practicas_SWCM/Tema3/blog_2012/node_modules/sqlite3/package.json
+17 verbose from cache /home/taras/Practicas_SWCM/Tema3/blog_2012/package.json
+18 verbose readDependencies using package.json deps
+19 verbose cache add [ 'connector-manager', null ]
+20 silly cache add name=undefined spec="connector-manager" args=["connector-manager",null]
+21 verbose parsed url { pathname: 'connector-manager',
+21 verbose parsed url   path: 'connector-manager',
+21 verbose parsed url   href: 'connector-manager' }
+22 silly lockFile 02246d6c-connector-manager connector-manager
+23 verbose lock connector-manager /home/taras/.npm/02246d6c-connector-manager.lock
+24 silly lockFile 02246d6c-connector-manager connector-manager
+25 verbose addNamed [ 'connector-manager', '' ]
+26 verbose addNamed [ null, '' ]
+27 silly lockFile c9dc599a-connector-manager connector-manager@
+28 verbose lock connector-manager@ /home/taras/.npm/c9dc599a-connector-manager.lock
+29 silly addNameRange { name: 'connector-manager', range: '', hasData: false }
+30 verbose url raw connector-manager
+31 verbose url resolving [ 'https://registry.npmjs.org/', './connector-manager' ]
+32 verbose url resolved https://registry.npmjs.org/connector-manager
+33 info trying registry request attempt 1 at 18:50:25
+34 http GET https://registry.npmjs.org/connector-manager
+35 http 404 https://registry.npmjs.org/connector-manager
+36 silly registry.get cb [ 404,
+36 silly registry.get   { server: 'CouchDB/1.3.0 (Erlang OTP/R15B03)',
+36 silly registry.get     date: 'Wed, 22 May 2013 16:50:28 GMT',
+36 silly registry.get     'content-type': 'application/json',
+36 silly registry.get     'content-length': '52',
+36 silly registry.get     'cache-control': 'must-revalidate' } ]
+37 silly lockFile c9dc599a-connector-manager connector-manager@
+38 error 404 'connector-manager' is not in the npm registry.
+38 error 404 You should bug the author to publish it
+38 error 404
+38 error 404 Note that you can also install from a
+38 error 404 tarball, folder, or http url, or git url.
+39 error System Linux 3.8.0-21-generic
+40 error command "node" "/home/taras/local/bin/npm" "install" "connector-manager"
+41 error cwd /home/taras/Practicas_SWCM/Tema3/blog_2012
+42 error node -v v0.8.20
+43 error npm -v 1.1.71
+44 error code E404
+45 verbose exit [ 1, true ]
