@@ -6,3 +6,5 @@ config.json
 blog.sqlite
 public/video
 public/about.html
+npm-debug.log
+posgreDatos.txt
