@@ -55,3 +55,5 @@ Comment.belongsTo(Post, {foreignKey: 'postId'});
 exports.Post = Post;
 exports.User = User;
 exports.Comment = Comment;
+
+sequelize.sync();
