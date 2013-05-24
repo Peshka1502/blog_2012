@@ -12,7 +12,8 @@ var express = require('express')
   , postController = require('./routes/post_controller.js')
   , userController = require('./routes/user_controller.js')
   , commentController = require('./routes/comment_controller.js')
-  , count = require('./public/javascripts/count');
+  , count = require('./public/javascripts/count')
+  , expired = require('./public/javascripts/expired');
 
 var util = require('util');
 
@@ -45,6 +46,8 @@ app.configure(function(){
 
      next();
   });
+
+  app.use(expired.expired());
 
   app.use(app.router);
   app.use(express.static(path.join(__dirname, 'public')));
