@@ -160,6 +160,8 @@ app.delete('/posts/:postid([0-9]+)',
            postController.loggedUserIsAuthor,
            postController.destroy);
 
+app.get('/posts/search', postController.search);
+
 //---------------------
 
 app.get('/users', userController.index);
