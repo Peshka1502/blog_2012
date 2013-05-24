@@ -316,7 +316,10 @@ exports.search = function(req, res, next) {
   var searchOk = "%" + search.replace(/ +/g,"%") + "%"; 
 
   models.Post
-    .findAll({where: ["title like ? OR body like ?", searchOk, searchOk], order: 'updatedAt DESC'})
+    .findAll({where: ["title like ? OR body like ?", searchOk, searchOk], 
+                order: 'updatedAt DESC', 
+                include: [ { model: models.User, as: 'Author' }]
+              })
     .success(function(posts) {
       res.render('posts/search',{
         search: search,
