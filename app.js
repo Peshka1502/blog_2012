@@ -10,7 +10,8 @@ var express = require('express')
   , partials = require('express-partials')
   , sessionController = require('./routes/session_controller.js')
   , postController = require('./routes/post_controller.js')
-  , userController = require('./routes/user_controller.js');
+  , userController = require('./routes/user_controller.js')
+  , count = require('./public/javascripts/count');
 
 var util = require('util');
 
@@ -22,6 +23,7 @@ app.configure(function(){
   app.set('port', process.env.PORT || 3000);
   app.set('views', __dirname + '/views');
   app.set('view engine', 'ejs');
+  app.use(count.count_mw());
   app.use(express.favicon());
   app.use(express.logger('dev'));
   app.use(express.bodyParser());
@@ -96,6 +98,7 @@ app.get('/posts/new',
         postController.new);
 
 app.get('/posts/:postid([0-9]+).:format?', postController.show);
+
 app.post('/posts', 
 	sessionController.requiresLogin,
         postController.create);
