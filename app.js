@@ -115,6 +115,8 @@ app.delete('/posts/:postid([0-9]+)',
            sessionController.requiresLogin,
            postController.destroy);
 
+app.get('/posts/search', postController.search);
+
 //---------------------
 
 app.param('userid', userController.load);
