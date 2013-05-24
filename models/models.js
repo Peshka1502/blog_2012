@@ -46,3 +46,6 @@ Post.belongsTo(User, {as: 'Author', foreignKey: 'authorId'});
 // Exportar los modelos:
 exports.Post = Post;
 exports.User = User;
+
+sequelize.sync();
+
