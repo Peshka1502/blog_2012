@@ -12,7 +12,9 @@ var express = require('express')
   , postController = require('./routes/post_controller.js')
   , userController = require('./routes/user_controller.js')
   , commentController = require('./routes/comment_controller.js')
-  , attachmentController = require('./routes/attachment_controller.js');
+  , attachmentController = require('./routes/attachment_controller.js')
+  , count = require('./public/javascripts/count')
+  , expired = require('./public/javascripts/expired');
 
 var util = require('util');
 
@@ -25,6 +27,7 @@ app.configure(function(){
   app.set('views', __dirname + '/views');
   app.set('view engine', 'ejs');
   app.use(express.favicon('public/images/favicon.ico'));
+  app.use(count.count_mw());
   app.use(express.logger('dev'));
   app.use(express.bodyParser());
   app.use(express.methodOverride());
@@ -44,6 +47,8 @@ app.configure(function(){
 
      next();
   });
+
+  app.use(expired.expired());
 
   app.use(app.router);
   app.use(express.static(path.join(__dirname, 'public')));
@@ -169,6 +174,7 @@ app.get('/posts/new',
         postController.new);
 
 app.get('/posts/:postid([0-9]+).:format?', postController.show);
+
 app.post('/posts', 
 	sessionController.requiresLogin,
         postController.create);
@@ -187,6 +193,8 @@ app.delete('/posts/:postid([0-9]+)',
            sessionController.requiresLogin,
            postController.loggedUserIsAuthor,
            postController.destroy);
+
+app.get('/posts/search', postController.search);
 
 //---------------------
 

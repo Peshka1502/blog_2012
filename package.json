@@ -13,7 +13,8 @@
     "sequelize": "git://github.com/sequelize/sequelize.git",
     "connect-flash": "*",
     "cloudinary": "",
-    "xmlbuilder": "0.4.2"
+    "xmlbuilder": "0.4.2",
+    "cloudinary": ""
   },
   "devDependencies": {
     "sqlite3": ">=2.0.0"

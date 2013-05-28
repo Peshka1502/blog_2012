@@ -49,7 +49,8 @@ exports.index = function(req, res, next) {
 
     models.Post
         .findAll({order: 'updatedAt DESC',
-	                include: [ { model: models.User, as: 'Author' } ]
+	                include: [ { model: models.User, as: 'Author'},
+                             { model: models.Comment, as: 'Comments'} ]
 	      })
         .success(function(posts) {
 
@@ -335,4 +336,27 @@ exports.destroy = function(req, res, next) {
        .error(function(error) {
            next(error);
        });
+};
+
+// GET /posts/search
+exports.search = function(req, res, next) {
+  var search = req.query.search || "";
+
+  var searchOk = "%" + search.replace(/ +/g,"%") + "%"; 
+
+  models.Post
+    .findAll({where: ["title like ? OR body like ?", searchOk, searchOk], 
+                order: 'updatedAt DESC', 
+                include: [ { model: models.User, as: 'Author' }]
+              })
+    .success(function(posts) {
+      res.render('posts/search',{
+        search: search,
+        posts:posts
+      });
+    })
+    .error(function(error){
+      console.log("Error: No se pudo buscar en los posts.");
+      res.redirect('/');
+    });
 };
