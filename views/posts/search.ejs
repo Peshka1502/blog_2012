@@ -1,5 +1,6 @@
 <header>
-  <h2> Posts </h2>
+  <h2> Resultado de la búsqueda <span id="search"> - "<%= search %>"</span></h2>
+
 </header>
 
 <% for (var i in posts) { %>
@@ -26,7 +27,7 @@
         </form>
 
       <% } %>
-      <em> Número comentarios: <%= posts[i].comments.length %> </em>
+
      </footer>
   </article>
 
