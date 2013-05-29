@@ -33,48 +33,13 @@
 
           <a class="brand" href="/">El Blog de CORE</a>
 
-          <div class="btn-group pull-right">
-            <a class="btn dropdown-toggle" data-toggle="dropdown" href="#">
-              <i class="icon-user"></i> 
-                <% if (session.user) { %>
-                  <%= session.user.name %>       
-                <% } else { %>
-                  Entrar o Registrarse
-                <% } %>
-              <span class="caret"></span>
-            </a>
-            <ul class="dropdown-menu">
-              <% if (session.user) { %>
-                  <li><a href="/users/<%= session.user.id%>">Mi Perfil</a></li>
-                  <li class="divider"></li>
-                  <li><a href="/logout">Salir</a></li>
-              <% } else { %>
-                  <li><a href="/login?redir=/posts">Entrar</a></li>
-                  <li class="divider"></li>
-                  <li><a href="/users/new">Registarse</a></li>
-              <% } %>
-            </ul>
-          </div>
-
           <div class="nav-collapse">
             <ul class="nav">
               <li><a href="/"><i class='icon-home icon-white'></i> Home</a></li>
-              <li><a href="/posts"><i class='icon-tasks icon-white'></i> Posts</a></li>
-              <li><a href="/users"><i class='icon-user icon-white'></i> Usuarios</a></li> 
-              <% if (session.user) { %>
-                <li><a href="/users/<%= session.user.id%>/favourites"><i class='icon-star icon-white'></i> Favoritos</a></li>
-              <% } %>
             </ul>
           </div><!--/.nav-collapse -->
 
-          <div >
-            <form class="form-search" id="busqueda" method='get' action='/posts/search'>
-              <div class="input-append">
-                <input type="text" name='search' class="span2 search-query">
-                <button type="submit" class="btn">Buscar</button>
-              </div>
-            </form>
-          </div>
+          
 
         </div>
       </div>
@@ -86,72 +51,15 @@
 
         <div class="span10">
 
-          <% var flash = flash() %>
-
-          <% if (flash.info) { %>
-            <div class="row">
-              <div class="span12">
-                <div class='alert alert-info'>
-                  <a class="close" data-dismiss="alert" href="#">×</a>
-                  <h3 class='alert-heading'>Información de interés:</h3>
-                  <ul>
-                    <% for (var i in flash.info) { %>
-                      <li> <%= flash.info[i] %> </li>
-                    <% } %>
-                  </ul>
-                </div>
-              </div>
-            </div>
-          <% } %>
-
-
-          <% if (flash.success) { %>
-            <div class="row">
-              <div class="span12">
-                <div class='alert alert-success'>
-                  <a class="close" data-dismiss="alert" href="#">×</a>
-                  <h3 class='alert-heading'>Tareas completadas con éxito:</h3>
-                  <ul>
-                    <% for (var i in flash.success) { %>
-                      <li> <%= flash.success[i] %> </li>
-                    <% } %>
-                  </ul>
-                </div>
-              </div>
-            </div>
-          <% } %>
-
-
-          <% if (flash.error) { %>
-            <div class="row">
-              <div class="span12">
-                <div class='alert alert-error'>
-                  <a class="close" data-dismiss="alert" href="#">×</a>
-                  <h3 class='alert-heading'>Errores encontrados:</h3>
-                  <ul>
-                    <% for (var i in flash.error) { %>
-                      <li> <%= flash.error[i] %> </li>
-                    <% } %>
-                  </ul>
-                </div>
-              </div>
-            </div>
-          <% } %>
-
-          <div class="row-fluid">
-            <div class="span12">
-              <%- body %>
-            </div>
-          </div>
+        <h1> Proyecto para la asignatura de SWCM</h1>
+        <br>
+        <p> Desarollado por Taras Sotnikov y Eduardo Mayoral Ruiz. </p>
   
         </div><!--/span10-->
 
         <div class="span2">
           <div class="well sidebar-nav">
             <ul class="nav nav-list">
-              <li class="nav-header">Conócenos</li>
-              <li><a href="/about.html">Video</a></li>
-
               <li class="nav-header">Asignatura</li>
               <li><a target="_blank" href="http://moodle.dit.upm.es">Moodle</a></li>
 
@@ -177,15 +85,12 @@
               <li><a target="_blank" href="http://www.upm.es">UPM</a></li>
             </ul>
           </div><!--/.well -->
-         
-          <div class="well">
-            <strong>Visitas: <%= counter %></strong>
-          </div>
-       
           <img class='hidden-phone' src='/images/apple_core.png'>
         </div><!--/span -->
 
       </div><!--/row-->
+
+
 
 
       <div class="row-fluid">
