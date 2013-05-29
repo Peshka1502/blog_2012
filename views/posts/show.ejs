@@ -1,9 +1,37 @@
 
-
  <div class="post">
     <div class="page-header">
       <h1>
         <%= post.title %>
+
+        <% 
+          if(session.user){ %>
+            <% 
+              var mark2 = false;
+              for(var j in favourites){
+                 if (favourites[j].UserId == session.user.id){
+                   mark2 = true;
+                 }
+              }
+        %>
+        
+            <% if(mark2){ %>
+              <form class='pull-right' method='post' 
+                    action='/users/<%= session.user.id %>/favourites/<%= post.id%>?redir=/posts/<%= post.id %>'>
+
+                <input type='hidden' name='_method' value='delete'>
+                <input type="image" src="/images/estrella2.png" class="btn" onclick="this.form.submit()">
+              </form>
+            <% }else{ %>
+              <form class='pull-right' method='post' 
+                    action='/users/<%= session.user.id %>/favourites/<%= post.id%>?redir=/posts/<%= post.id %>'>
+
+                <input type='hidden' name='_method' value='put'>
+                <input type="image" src="/images/estrella1.png" class="btn" onclick="this.form.submit()">
+              </form>
+            <% } %>
+        <% } %>
+
         <small>por <em> <%= post.author && post.author.name || "Sin autor" %> </em></small>
       </h1>
      <em> <%= post.updatedAt.toLocaleDateString() %></em>

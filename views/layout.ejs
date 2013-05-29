@@ -21,16 +21,17 @@
 <body>
 
     <div class="navbar navbar-inverse navbar-fixed-top">
-      <div class="navbar-inner">
+      <div class="navbar-inner" >
         <div class="container-fluid">
 
           <a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
             <span class="icon-bar"></span>
             <span class="icon-bar"></span>
             <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
           </a>
 
-          <a class="brand" href="#">El Blog de CORE</a>
+          <a class="brand" href="/">El Blog de CORE</a>
 
           <div class="btn-group pull-right">
             <a class="btn dropdown-toggle" data-toggle="dropdown" href="#">
@@ -59,9 +60,21 @@
             <ul class="nav">
               <li><a href="/"><i class='icon-home icon-white'></i> Home</a></li>
               <li><a href="/posts"><i class='icon-tasks icon-white'></i> Posts</a></li>
-              <li><a href="/users"><i class='icon-user icon-white'></i> Usuarios</a></li>
+              <li><a href="/users"><i class='icon-user icon-white'></i> Usuarios</a></li> 
+              <% if (session.user) { %>
+                <li><a href="/users/<%= session.user.id%>/favourites"><i class='icon-star icon-white'></i> Favoritos</a></li>
+              <% } %>
             </ul>
           </div><!--/.nav-collapse -->
+
+          <div >
+            <form class="form-search" id="busqueda" method='get' action='/posts/search'>
+              <div class="input-append">
+                <input type="text" name='search' class="span2 search-query">
+                <button type="submit" class="btn">Buscar</button>
+              </div>
+            </form>
+          </div>
 
         </div>
       </div>
@@ -172,7 +185,7 @@
           <hr>
 
           <footer>
-            <p class="text-info"> <small>&copy; Universidad Politécnica de Madrid. Curso 2012-2013.</small></p>
+            <p class="text-info"> <small>&copy; Taras Sotnikov y Eduardo Mayoral Ruiz. Universidad Politécnica de Madrid. Curso 2012-2013.</small></p>
           </footer>
         </div>
       </div>

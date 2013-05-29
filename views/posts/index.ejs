@@ -3,6 +3,32 @@
     <div class="page-header">
       <h1>
         <a href='/posts/<%= posts[i].id %>' class='titlelink'> <%= posts[i].title %> </a>
+        <% if(session.user){ %>
+            <% 
+              var mark = false;
+                for(var j in posts[i].favourites){
+                  if (posts[i].favourites[j].UserId == session.user.id){
+                    mark = true;
+                  }
+                }
+            %>
+        
+            <% if(mark){ %>
+              <form class='pull-right' method='post' 
+                    action='/users/<%= session.user.id %>/favourites/<%= posts[i].id%>?redir=/posts'>
+
+                <input type='hidden' name='_method' value='delete'>
+                <input type="image" src="/images/estrella2.png" class="btn" onclick="this.form.submit()">
+              </form>
+            <% }else{ %>
+              <form class='pull-right' method='post' 
+                    action='/users/<%= session.user.id %>/favourites/<%= posts[i].id%>?redir=/posts'>
+
+                <input type='hidden' name='_method' value='put'>
+                <input type="image" src="/images/estrella1.png" class="btn" onclick="this.form.submit()">
+              </form>
+            <% } %>
+        <% } %>
         <small>por <em> <%= posts[i].author && posts[i].author.name || "Sin autor" %> </em></small>
       </h1>
      <em> <%= posts[i].updatedAt.toLocaleDateString() %></em>
@@ -11,6 +37,8 @@
      <p>
         <%= posts[i].body.slice(0,1000) %> ... 
      </p>
+
+     <em> Número de comentarios: <%= posts[i].comments.length %> </em> 
 
      <footer class="pull-right">
 
@@ -31,8 +59,8 @@
         </form>
 
       <% } %>
-      <em> Número comentarios: <%= posts[i].comments.length %> </em>
-     <footer>
+
+     </footer>
   </div>
 <%  }; %>
 

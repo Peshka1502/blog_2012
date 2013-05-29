@@ -1,6 +1,10 @@
 # Proyecto CORE/SWCM
 
-Proyecto de la asignatura CORE 2012-2013
+Proyecto de la asignatura SWCM 2012-2013
+
+Autores: Taras SOtnikov y Eduardo Mayoral Ruiz
+
+Desplegado en Heroku: http://taras-edu.herokuapp.com/
 
 ## Temario
 
@@ -27,7 +31,5 @@ Proyecto de la asignatura CORE 2012-2013
 * Tema 10: Recurso Adjuntos.
 
 * Tema 11: Twitter Bootstrap.
-
-* Tema 12: Paginación.
 
  

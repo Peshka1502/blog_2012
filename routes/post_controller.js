@@ -50,7 +50,8 @@ exports.index = function(req, res, next) {
     models.Post
         .findAll({order: 'updatedAt DESC',
 	                include: [ { model: models.User, as: 'Author'},
-                             { model: models.Comment, as: 'Comments'} ]
+                             { model: models.Comment, as: 'Comments'},
+                             { model: models.Favourite, as: 'Favourites'} ]
 	      })
         .success(function(posts) {
 
@@ -126,48 +127,57 @@ exports.show = function(req, res, next) {
             // Buscar Adjuntos
             req.post.getAttachments({order: 'updatedAt DESC'})
                .success(function(attachments) {
-            
-                  // Buscar comentarios
-                  models.Comment
-                       .findAll({where: {postId: req.post.id},
-                                 order: 'updatedAt DESC',
-                                 include: [ { model: models.User, as: 'Author' } ] 
-                       })
-                       .success(function(comments) {
+                  
+                  models.Favourite
+                    .findAll({where: {PostId: req.post.id}})
+                    .success(function(favourites){ 
 
-                          var format = req.params.format || 'html';
-                          format = format.toLowerCase();
+                        // Buscar comentarios
+                        models.Comment
+                             .findAll({where: {postId: req.post.id},
+                                       order: 'updatedAt DESC',
+                                       include: [ { model: models.User, as: 'Author' } ] 
+                             })
+                             .success(function(comments) {
 
-                          switch (format) { 
-                            case 'html':
-                            case 'htm':
-                                var new_comment = models.Comment.build({
-                                    body: 'Introduzca el texto del comentario'
-                                });
-                                res.render('posts/show', {
-                                    post: req.post,
-                                    comments: comments,
-                                    comment: new_comment,
-                                    attachments: attachments
-                                });
-                                break;
-                            case 'json':
-                                res.send(req.post);
-                                break;
-                            case 'xml':
-                                res.send(post_to_xml(req.post));
-                                break;
-                            case 'txt':
-                                res.send(req.post.title+' ('+req.post.body+')');
-                                break;
-                            default:
-                                console.log('No se soporta el formato \".'+format+'\" pedido para \"'+req.url+'\".');
-                                res.send(406);
-                          }
-                       })
-                       .error(function(error) {
-                           next(error);
-                       })
+                                var format = req.params.format || 'html';
+                                format = format.toLowerCase();
+
+                                switch (format) { 
+                                  case 'html':
+                                  case 'htm':
+                                      var new_comment = models.Comment.build({
+                                          body: 'Introduzca el texto del comentario'
+                                      });
+                                      res.render('posts/show', {
+                                          post: req.post,
+                                          comments: comments,
+                                          comment: new_comment,
+                                          attachments: attachments,
+                                          favourites: favourites
+                                      });
+                                      break;
+                                  case 'json':
+                                      res.send(req.post);
+                                      break;
+                                  case 'xml':
+                                      res.send(post_to_xml(req.post));
+                                      break;
+                                  case 'txt':
+                                      res.send(req.post.title+' ('+req.post.body+')');
+                                      break;
+                                  default:
+                                      console.log('No se soporta el formato \".'+format+'\" pedido para \"'+req.url+'\".');
+                                      res.send(406);
+                                }
+                             })
+                             .error(function(error) {
+                                 next(error);
+                             });
+                      })
+                      .error(function(error) {
+                        next(error);
+                      });
                 })
                .error(function(error) {
                    next(error);
@@ -340,6 +350,7 @@ exports.destroy = function(req, res, next) {
 
 // GET /posts/search
 exports.search = function(req, res, next) {
+
   var search = req.query.search || "";
 
   var searchOk = "%" + search.replace(/ +/g,"%") + "%"; 
@@ -347,7 +358,8 @@ exports.search = function(req, res, next) {
   models.Post
     .findAll({where: ["title like ? OR body like ?", searchOk, searchOk], 
                 order: 'updatedAt DESC', 
-                include: [ { model: models.User, as: 'Author' }]
+                include: [ { model: models.User, as: 'Author' },
+                            models.Favourite]
               })
     .success(function(posts) {
       res.render('posts/search',{
